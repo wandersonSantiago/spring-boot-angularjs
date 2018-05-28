@@ -39,8 +39,8 @@ public class PedidoPagamentoTest {
 		
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	
-	Pedido pedido1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), clienteService.buscarPorId(3L), enderecoRepository.findById(1L).get()); 
-	Pedido pedido2 = new Pedido(null, sdf.parse("10/10/2017 19:32"), clienteService.buscarPorId(3L), enderecoRepository.findById(1L).get());
+	Pedido pedido1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), clienteService.findById(3L), enderecoRepository.findById(1L).get()); 
+	Pedido pedido2 = new Pedido(null, sdf.parse("10/10/2017 19:32"), clienteService.findById(3L), enderecoRepository.findById(1L).get());
 	
 	Pagamento pagamento1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, pedido1, 6);
 	pedido1.setPagamento(pagamento1);
