@@ -38,7 +38,7 @@ public class ClienteEnderecoTest {
 		
 		cliente.getTelefones().addAll(Arrays.asList("19989074067","1984757547"));
 		
-		Cliente cli = clienteService.save(cliente);
+		Cliente cli = clienteService.insert(cliente);
 		
 		Endereco end = enderecoRepository.save(endereco);
 

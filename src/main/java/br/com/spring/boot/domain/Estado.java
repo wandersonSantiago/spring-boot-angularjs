@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tb_estado")
 public class Estado {
@@ -24,7 +26,7 @@ public class Estado {
 	@Column(name="est_nome")
 	private String nome;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="estado")
 	private List<Cidade> cidades = new ArrayList<>();
 

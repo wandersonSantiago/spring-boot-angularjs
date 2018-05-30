@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.spring.boot.domain.Categoria;
+import br.com.spring.boot.domain.Cliente;
 import br.com.spring.boot.dto.CategoriaDTO;
 import br.com.spring.boot.exceptions.DataIntegrityException;
 import br.com.spring.boot.exceptions.ObjectNotFoundException;
@@ -28,9 +29,15 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria obj) {
-		findById(obj.getId());
-		return categoriaRepository.save(obj);
+		Categoria newObj = findById(obj.getId());		
+		updateData(newObj, obj);
+		return categoriaRepository.save(newObj);
 	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());	
+	}
+
 	
 	public void delete(Long id) {
 		findById(id);
