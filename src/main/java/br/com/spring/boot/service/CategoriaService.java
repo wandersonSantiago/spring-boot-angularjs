@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.spring.boot.domain.Categoria;
-import br.com.spring.boot.domain.Cliente;
 import br.com.spring.boot.dto.CategoriaDTO;
 import br.com.spring.boot.exceptions.DataIntegrityException;
 import br.com.spring.boot.exceptions.ObjectNotFoundException;
