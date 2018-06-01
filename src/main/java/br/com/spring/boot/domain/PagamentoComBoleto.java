@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import br.com.spring.boot.domain.enums.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 @Table(name="tb_pagamento_com_boleto")
 public class PagamentoComBoleto extends Pagamento {
 

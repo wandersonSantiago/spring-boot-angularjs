@@ -3,9 +3,12 @@ package br.com.spring.boot.domain;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import br.com.spring.boot.domain.enums.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 @Table(name="tb_pagamento_com_cartao")
 public class PagamentoComCartao extends Pagamento {
 
