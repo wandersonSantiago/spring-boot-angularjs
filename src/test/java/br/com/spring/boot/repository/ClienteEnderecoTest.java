@@ -32,7 +32,7 @@ public class ClienteEnderecoTest {
 	public void save() {
 		
 		
-		Cliente cliente = new Cliente(null, "Wanderson Santiago", "wandersonsantiago86@gmail.com", "34826591845", TipoCliente.PESSOA_FISICA);
+		Cliente cliente = new Cliente(null, "Wanderson Santiago", "wandersonsantiago86@gmail.com", "34826591845", TipoCliente.PESSOA_FISICA,null);
 		
 		Endereco endereco = new Endereco(null, "Av. Rebouças", "3300", "Apartamento 124", "Centro", "13174371", cliente, cidadeService.buscarPorId(1L));
 		

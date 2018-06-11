@@ -4,18 +4,21 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import br.com.spring.boot.domain.Cliente;
 import br.com.spring.boot.domain.ItemPedido;
 import br.com.spring.boot.domain.PagamentoComBoleto;
 import br.com.spring.boot.domain.Pedido;
 import br.com.spring.boot.domain.enums.EstadoPagamento;
+import br.com.spring.boot.exceptions.AuthorizationException;
 import br.com.spring.boot.exceptions.ObjectNotFoundException;
-import br.com.spring.boot.repository.ClienteRepository;
 import br.com.spring.boot.repository.ItemPedidoRepository;
 import br.com.spring.boot.repository.PagamentoRepository;
 import br.com.spring.boot.repository.PedidoRepository;
-import br.com.spring.boot.repository.ProdutoRepository;
+import br.com.spring.boot.security.UserSS;
 
 @Service
 public class PedidoService {
@@ -65,5 +68,14 @@ public class PedidoService {
 		itemPedidoRepository.saveAll(obj.getItens());
 		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
+	}
+	
+	public Page<Pedido> findPage(PageRequest page){
+		UserSS user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		Cliente cliente = clienteService.findById(user.getId());
+		return pedidoRepository.findByCliente(cliente, page);
 	}
 }
