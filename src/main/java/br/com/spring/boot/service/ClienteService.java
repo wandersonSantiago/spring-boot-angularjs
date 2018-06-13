@@ -1,5 +1,6 @@
 package br.com.spring.boot.service;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.spring.boot.domain.Cidade;
 import br.com.spring.boot.domain.Cliente;
@@ -34,7 +36,9 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+	@Autowired
+	private S3Service s3Service;
+	
 	@Transactional
 	public Cliente insert(Cliente obj) {
 		obj.setId(null);
@@ -103,4 +107,7 @@ public class ClienteService {
 		return clienteRepository.findAll(pageRequest);
 	}
 
+	public URI uploadProfilePictureFile(MultipartFile multpartFile) {
+		return s3Service.uploadFile(multpartFile);
+	}
 }
