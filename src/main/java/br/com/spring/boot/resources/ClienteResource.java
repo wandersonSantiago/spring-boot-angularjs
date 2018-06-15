@@ -63,6 +63,11 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(clienteService.findById(id));
 	}
 	
+	@GetMapping("/email")
+	public ResponseEntity<?> findByEmail(@RequestParam(value="value") String email) {
+		return ResponseEntity.ok().body(clienteService.findByEmail(email));
+	}
+	
 	@GetMapping
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		List<Cliente> list = clienteService.findAll();

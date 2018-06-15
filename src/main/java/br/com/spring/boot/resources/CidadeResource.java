@@ -1,5 +1,8 @@
 package br.com.spring.boot.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.spring.boot.domain.Cidade;
+import br.com.spring.boot.dto.CidadeDTO;
 import br.com.spring.boot.service.CidadeService;
 
 @RestController
@@ -24,10 +28,11 @@ public class CidadeResource {
 		return cidadeService.save(cidade);
 	}
 	
-	@GetMapping("{id}")
-	public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
-		return ResponseEntity.ok().body(cidadeService.buscarPorId(id));
+	@GetMapping("/estado/{id}")
+	public ResponseEntity<List<CidadeDTO>> findAllByOrderByNome(@PathVariable Long id) {
+		List<Cidade> cidades = cidadeService.findAllByEstadoIdOrderByNome(id);
+		List<CidadeDTO> cidadeDTO = cidades.stream().map(obj -> new CidadeDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(cidadeDTO);
 	}
-	
 	
 }

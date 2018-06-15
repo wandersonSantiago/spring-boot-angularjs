@@ -1,5 +1,6 @@
 package br.com.spring.boot.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,10 @@ public class EstadoService {
 		return estado.orElseThrow(() -> new ObjectNotFoundException("Busca não encontrada para o Id : "
 				+ id + " Tipo : " + Estado.class.getName()));
 	}
+
+	public List<Estado> findAllByOrderByNome() {
+		return estadoRepository.findAllByOrderByNome();
+	}
+
+	
 }

@@ -1,5 +1,6 @@
 package br.com.spring.boot.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,9 @@ public class CidadeService {
 		Optional<Cidade> cidade = cidadeRepository.findById(id);
 		return cidade.orElseThrow(() -> new ObjectNotFoundException(" Objeto não encontrado para o id : " + id 
 				+ " Tipo: " + Cidade.class.getName()));
+	}
+
+	public List<Cidade> findAllByEstadoIdOrderByNome(Long id) {
+		return cidadeRepository.findAllByEstadoIdOrderByNome(id);
 	}
 }
